@@ -22,8 +22,6 @@ public class UserService {
             throw UserAlreadyException.EXCEPTION;
         }
 
-        System.out.println(request.getPhoneNumber());
-
         userRepository.save(User.builder()
                 .name(request.getName())
                 .phoneNumber(request.getPhoneNumber())
