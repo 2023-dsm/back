@@ -27,8 +27,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
     }
 
     private void writerErrorCode(HttpServletResponse response, ErrorCode errorCode) throws IOException {
-        ErrorResponse errorResponse =
-                new ErrorResponse(errorCode);
+        ErrorResponse errorResponse = new ErrorResponse(errorCode);
 
         response.setStatus(errorCode.getStatus());
         response.setCharacterEncoding("UTF-8");

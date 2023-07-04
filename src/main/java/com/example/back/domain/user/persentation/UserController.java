@@ -1,7 +1,9 @@
 package com.example.back.domain.user.persentation;
 
+import com.example.back.domain.user.persentation.dto.reqeust.UserLoginRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserSignUpRequest;
 import com.example.back.domain.user.service.UserService;
+import com.example.back.global.error.exception.dto.response.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,12 @@ public class UserController {
     @PostMapping("/signup")
     public void userSignUp(@RequestBody UserSignUpRequest request) {
         userService.userSingUp(request);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/login")
+    public TokenResponse login(@RequestBody UserLoginRequest request) {
+        return userService.login(request);
     }
 
 }
