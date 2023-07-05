@@ -9,6 +9,7 @@ import com.example.back.domain.user.persentation.dto.reqeust.UserLoginRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserSignUpRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserWriteResumeRequest;
 import com.example.back.domain.user.persentation.dto.response.UserInfoResponse;
+import com.example.back.domain.user.persentation.dto.response.UserResumeResponse;
 import com.example.back.global.error.exception.dto.response.TokenResponse;
 import com.example.back.global.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,20 @@ public class UserService {
                 .name(user.getName())
                 .phoneNumber(user.getPhoneNumber())
                 .sex(user.getSex())
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public UserResumeResponse queryUserResume(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(()->UserNotFoundException.EXCEPTION);
+
+        return UserResumeResponse.builder()
+                .name(user.getName())
+                .address(user.getAddress())
+                .phoneNumber(user.getPhoneNumber())
+                .introduce(user.getIntroduce())
+                .career(user.getCareer())
                 .build();
     }
 

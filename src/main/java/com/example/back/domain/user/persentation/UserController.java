@@ -4,12 +4,14 @@ import com.example.back.domain.user.persentation.dto.reqeust.UserLoginRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserSignUpRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserWriteResumeRequest;
 import com.example.back.domain.user.persentation.dto.response.UserInfoResponse;
+import com.example.back.domain.user.persentation.dto.response.UserResumeResponse;
 import com.example.back.domain.user.service.UserService;
 import com.example.back.global.error.exception.dto.response.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +48,12 @@ public class UserController {
     @GetMapping("/info")
     public UserInfoResponse queryUserInfo() {
         return userService.queryUserInfo();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/get/resume/{user_id}")
+    public UserResumeResponse queryUserResume(@PathVariable("user_id") Long userId) {
+        return userService.queryUserResume(userId);
     }
 
     /*@GetMapping("/send/message")
