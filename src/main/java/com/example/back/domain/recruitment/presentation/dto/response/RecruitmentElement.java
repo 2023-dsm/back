@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class RecruitmentElement {
+    private final Long recruitmentId;
     private final String companyName;
     private final String workArea;
     private final ActivityType activityType;

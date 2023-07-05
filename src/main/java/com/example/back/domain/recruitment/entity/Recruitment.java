@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -22,6 +24,7 @@ public class Recruitment extends BaseEntity {
     private String companyName;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private ActivityType activityType;
 
     @NotNull
