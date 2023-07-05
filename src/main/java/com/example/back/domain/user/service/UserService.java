@@ -8,12 +8,12 @@ import com.example.back.domain.user.facade.UserFacade;
 import com.example.back.domain.user.persentation.dto.reqeust.UserLoginRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserSignUpRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserWriteResumeRequest;
+import com.example.back.domain.user.persentation.dto.response.UserInfoResponse;
 import com.example.back.global.error.exception.dto.response.TokenResponse;
 import com.example.back.global.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
@@ -57,6 +57,18 @@ public class UserService {
         User user = userFacade.getCurrentUser();
 
         user.writeResume(request.getAddress(), request.getIntroduce(), request.getCareer());
+    }
+
+    @Transactional(readOnly = true)
+    public UserInfoResponse queryUserInfo() {
+        User user = userFacade.getCurrentUser();
+
+        return UserInfoResponse.builder()
+                .age(user.getAge())
+                .name(user.getName())
+                .phoneNumber(user.getPhoneNumber())
+                .sex(user.getSex())
+                .build();
     }
 
     /*@Transactional

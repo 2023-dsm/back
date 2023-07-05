@@ -3,10 +3,12 @@ package com.example.back.domain.user.persentation;
 import com.example.back.domain.user.persentation.dto.reqeust.UserLoginRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserSignUpRequest;
 import com.example.back.domain.user.persentation.dto.reqeust.UserWriteResumeRequest;
+import com.example.back.domain.user.persentation.dto.response.UserInfoResponse;
 import com.example.back.domain.user.service.UserService;
 import com.example.back.global.error.exception.dto.response.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +40,12 @@ public class UserController {
     @PatchMapping("/resume")
     public void writeResume(@RequestBody UserWriteResumeRequest request) {
         userService.writeResume(request);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/info")
+    public UserInfoResponse queryUserInfo() {
+        return userService.queryUserInfo();
     }
 
     /*@GetMapping("/send/message")
