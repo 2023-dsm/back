@@ -33,9 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .anyRequest().permitAll()
-       /*         .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .antMatchers(HttpMethod.POST, "/stay/signup").permitAll()
-                .anyRequest().authenticated()*/
                 .and()
                 .apply(new FilterConfig(jwtTokenProvider));
 

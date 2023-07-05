@@ -32,6 +32,6 @@ public class ExceptionFilter extends OncePerRequestFilter {
         response.setStatus(errorCode.getStatus());
         response.setCharacterEncoding("UTF-8");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.getWriter().write(errorResponse.toString());
+        response.getWriter().write(errorResponse.getMessage());
     }
 }

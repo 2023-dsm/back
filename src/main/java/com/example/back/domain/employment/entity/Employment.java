@@ -1,5 +1,6 @@
 package com.example.back.domain.employment.entity;
 
+import com.example.back.domain.company.entity.Company;
 import com.example.back.domain.recruitment.entity.Recruitment;
 import com.example.back.domain.user.entity.User;
 import com.example.back.global.entity.BaseEntity;
@@ -31,7 +32,15 @@ public class Employment extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     @NotNull
     @ColumnDefault("0")
     private boolean status;
+
+    public void changeStatus(boolean status) {
+        this.status = status;
+    }
 }

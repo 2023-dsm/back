@@ -1,5 +1,6 @@
 package com.example.back.domain.recruitment.entity;
 
+import com.example.back.domain.company.entity.Company;
 import com.example.back.global.entity.BaseEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,8 +11,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Getter
 @Builder
@@ -55,5 +58,9 @@ public class Recruitment extends BaseEntity {
     private String manager;
 
     @NotNull
-    private LocalDate closeDate;
+    private String closeDate;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "company_id")
+    private Company company;
 }

@@ -30,6 +30,7 @@ public class UserService {
 
     @Transactional
     public void userSingUp(UserSignUpRequest request) {
+        System.out.println(request.getSex());
 
         if(userRepository.existsByPhoneNumber(request.getPhoneNumber())) {
             throw UserAlreadyException.EXCEPTION;
@@ -50,19 +51,19 @@ public class UserService {
         User user = userRepository.findByPhoneNumberAndName(request.getPhoneNumber(), request.getName())
                 .orElseThrow(()-> UserNotFoundException.EXCEPTION);
 
-        return new TokenResponse(jwtTokenProvider.getAccessToken(user.getId()));
+        return new TokenResponse(jwtTokenProvider.getUserAccessToken(user.getId()));
     }
 
     @Transactional
     public void writeResume(UserWriteResumeRequest request) {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getUserCurrentUser();
 
         user.writeResume(request.getAddress(), request.getIntroduce(), request.getCareer());
     }
 
     @Transactional(readOnly = true)
     public UserInfoResponse queryUserInfo() {
-        User user = userFacade.getCurrentUser();
+        User user = userFacade.getUserCurrentUser();
 
         return UserInfoResponse.builder()
                 .age(user.getAge())
