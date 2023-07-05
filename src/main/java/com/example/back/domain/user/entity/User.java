@@ -27,8 +27,18 @@ public class User extends BaseEntity {
     private int age;
 
     @NotNull
-    private String address;
+    private String sex;
 
     @NotNull
-    private String sex;
+    private String address;
+
+    private String introduce;
+
+    private String career;
+
+    public void writeResume(String address, String introduce, String career) {
+        this.address = address;
+        this.introduce = introduce;
+        this.career = career;
+    }
 }
